@@ -36,30 +36,38 @@ namespace AlgorithmsUnlocked
             
             return answer;
         }
+
+        static void PrintSearchResult(int answer, int searchValue)
+        {
+            if (answer == (int)Errors.ValueNotFound)
+            {
+                Console.WriteLine("Error: value " + searchValue + " not found in array!");
+            }
+            else if (answer == (int)Errors.OutOfRange)
+            {
+                Console.WriteLine("Error: out of range!");
+            }
+            else
+            {
+                Console.WriteLine("Value " + searchValue + " found at index: " + answer);
+            }
+        }
+        
         static void Main(string[] args)
         {
             // Declare variables and constants
-            int[] testArray = {1, 2, 3, 4, 5, 6, 7, 8, 9};
-            const int ValueToSearch = 8;
+            int[] testArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+            int[] valuesToSearch = { 8, 10, 6 };
             int answer;
 
             // Start the program
             Console.WriteLine("Algorithms Unlocked.");
             
             // TEST LinearSearch
-            answer = LinearSearch(testArray, testArray.Length, ValueToSearch);
-
-            if (answer == (int)Errors.ValueNotFound)
+            for (int i = 0; i < valuesToSearch.Length; i++)
             {
-                Console.WriteLine("Error: value not found in array");
-            }
-            else if (answer == (int)Errors.OutOfRange)
-            {
-                Console.WriteLine("Error: out of range");
-            }
-            else
-            {
-                Console.WriteLine("Value " + ValueToSearch + " found at index: " + answer);
+                answer = LinearSearch(testArray, testArray.Length, valuesToSearch[i]);
+                PrintSearchResult(answer, valuesToSearch[i]);
             }
         }
     }   
