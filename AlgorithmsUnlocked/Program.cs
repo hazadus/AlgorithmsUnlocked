@@ -39,18 +39,27 @@ namespace AlgorithmsUnlocked
 
         static void PrintSearchResult(int answer, int searchValue)
         {
+            // Save current console color
+            ConsoleColor lastColor = Console.ForegroundColor;
+            
             if (answer == (int)Errors.ValueNotFound)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: value " + searchValue + " not found in array!");
             }
             else if (answer == (int)Errors.OutOfRange)
             {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Error: out of range!");
             }
             else
             {
+                Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("Value " + searchValue + " found at index: " + answer);
             }
+            
+            // Reset console color
+            Console.ForegroundColor = lastColor;
         }
         
         static void Main(string[] args)
@@ -61,7 +70,7 @@ namespace AlgorithmsUnlocked
             int answer;
 
             // Start the program
-            Console.WriteLine("Algorithms Unlocked.");
+            Console.WriteLine("Algorithms Unlocked. Linear Search tests:");
             
             // TEST LinearSearch
             for (int i = 0; i < valuesToSearch.Length; i++)
