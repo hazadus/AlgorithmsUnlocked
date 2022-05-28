@@ -15,6 +15,19 @@ namespace AlgorithmsUnlocked
             OutOfRange = -1,
             ValueNotFound = -2
         }
+
+        static int[] CreateTestArray(int arraySize)
+        {
+            int[] testArray = new int[arraySize];
+
+            for (int i = 0; i < arraySize; i++)
+            {   
+                // TODO Append random numbers to array
+                testArray[i] = i;
+            }
+
+            return testArray;
+        }
         
         static int LinearSearch(int[] array, int numberOfElements, int searchValue)
         {
@@ -65,18 +78,19 @@ namespace AlgorithmsUnlocked
         static void Main(string[] args)
         {
             // Declare variables and constants
-            int[] testArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-            int[] valuesToSearch = { 8, 10, 6 };
-            int answer;
+            //int[] testArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // TODO Add method to initialise test array with random numbers
+            int[] valuesToSearch = { 8, 10, 6 }; // TODO Add method to generate random search values
+            const int TestArraySize = 64;
 
             // Start the program
             Console.WriteLine("Algorithms Unlocked. Linear Search tests:");
             
             // TEST LinearSearch
+            int[] testArray = CreateTestArray(TestArraySize);
             for (int i = 0; i < valuesToSearch.Length; i++)
             {
-                answer = LinearSearch(testArray, testArray.Length, valuesToSearch[i]);
-                PrintSearchResult(answer, valuesToSearch[i]);
+                PrintSearchResult(LinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
+                    valuesToSearch[i]);
             }
         }
     }   
