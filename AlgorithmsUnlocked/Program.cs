@@ -88,8 +88,8 @@ namespace AlgorithmsUnlocked
         static void Main(string[] args)
         {
             // Declare constants
-            const int TestArraySize = 64;
-            const int ValuesToSearchCount = 5;
+            const int TestArraySize = 64000;
+            const int ValuesToSearchCount = 3;
 
             // Start the program
             Console.WriteLine("* * * Algorithms Unlocked. Linear Search tests * * *");
@@ -98,14 +98,22 @@ namespace AlgorithmsUnlocked
             int[] testArray = CreateTestArray(TestArraySize);
             int[] valuesToSearch = CreateTestArray(ValuesToSearchCount);
             
-            PrintArray(testArray, nameof(testArray));
+            //PrintArray(testArray, nameof(testArray));
             PrintArray(valuesToSearch, nameof(valuesToSearch));
             
+            // Save starting time
+            DateTime startTime = DateTime.Now;
+            
+            // Search and print
             for (int i = 0; i < valuesToSearch.Length; i++)
             {
                 PrintSearchResult(LinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
                     valuesToSearch[i]);
             }
+            
+            // Print execution time
+            TimeSpan execTime = (DateTime.Now).Subtract(startTime);
+            Console.WriteLine("Search time: " + execTime.Seconds + " s " + execTime.Milliseconds + " ms");
         }
     }   
 }
