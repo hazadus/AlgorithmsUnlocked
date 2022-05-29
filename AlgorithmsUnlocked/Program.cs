@@ -19,14 +19,24 @@ namespace AlgorithmsUnlocked
         static int[] CreateTestArray(int arraySize)
         {
             int[] testArray = new int[arraySize];
+            Random rnd = new Random();
 
             for (int i = 0; i < arraySize; i++)
             {   
-                // TODO Append random numbers to array
-                testArray[i] = i;
+                testArray[i] = rnd.Next(11); // generate rnd int in 0...10 range
             }
 
             return testArray;
+        }
+
+        static void PrintArray(int[] arrayToPrint, string nameOfArray)
+        {
+            Console.Write(nameOfArray + ": ");
+            foreach (var value in arrayToPrint)
+            {
+                Console.Write(value + " ");
+            }
+            Console.Write("\n");
         }
         
         static int LinearSearch(int[] array, int numberOfElements, int searchValue)
@@ -77,16 +87,20 @@ namespace AlgorithmsUnlocked
         
         static void Main(string[] args)
         {
-            // Declare variables and constants
-            //int[] testArray = { 1, 2, 3, 4, 5, 6, 7, 8, 9 }; // TODO Add method to initialise test array with random numbers
-            int[] valuesToSearch = { 8, 10, 6 }; // TODO Add method to generate random search values
+            // Declare constants
             const int TestArraySize = 64;
+            const int ValuesToSearchCount = 5;
 
             // Start the program
-            Console.WriteLine("Algorithms Unlocked. Linear Search tests:");
+            Console.WriteLine("* * * Algorithms Unlocked. Linear Search tests * * *");
             
             // TEST LinearSearch
             int[] testArray = CreateTestArray(TestArraySize);
+            int[] valuesToSearch = CreateTestArray(ValuesToSearchCount);
+            
+            PrintArray(testArray, nameof(testArray));
+            PrintArray(valuesToSearch, nameof(valuesToSearch));
+            
             for (int i = 0; i < valuesToSearch.Length; i++)
             {
                 PrintSearchResult(LinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
