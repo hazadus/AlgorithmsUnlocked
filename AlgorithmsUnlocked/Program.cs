@@ -101,11 +101,13 @@ namespace AlgorithmsUnlocked
             PrintArray(testArray, nameof(testArray));
             PrintArray(valuesToSearch, nameof(valuesToSearch));
             
+            // track time
             for (int i = 0; i < valuesToSearch.Length; i++)
             {
                 PrintSearchResult(LinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
                     valuesToSearch[i]);
             }
+            // print tracked time
         }
     }   
 }
