@@ -60,6 +60,31 @@ namespace AlgorithmsUnlocked
             return answer;
         }
 
+        static int BetterLinearSearch(int[] array, int numberOfElements, int searchValue)
+        {
+            int answer;
+
+            if (array.Length < numberOfElements)
+            {
+                answer = (int)Errors.OutOfRange;
+            }
+            else
+            {
+                answer = (int)Errors.ValueNotFound;
+                
+                for (int i = 0; i < numberOfElements; i++)
+                {
+                    if (array[i] == searchValue)
+                    {
+                        answer = i;
+                        return answer; // The difference with LinearSearch method is in this line.
+                    }
+                }
+            }
+            
+            return answer;
+        }
+
         static void PrintSearchResult(int answer, int searchValue)
         {
             // Save current console color
@@ -101,6 +126,7 @@ namespace AlgorithmsUnlocked
             //PrintArray(testArray, nameof(testArray));
             PrintArray(valuesToSearch, nameof(valuesToSearch));
             
+            // TEST LINEAR SEARCH
             // Save starting time
             DateTime startTime = DateTime.Now;
             
@@ -113,7 +139,22 @@ namespace AlgorithmsUnlocked
             
             // Print execution time
             TimeSpan execTime = (DateTime.Now).Subtract(startTime);
-            Console.WriteLine("Search time: " + execTime.Seconds + " s " + execTime.Milliseconds + " ms");
+            Console.WriteLine("Search time with LinearSearch: " + execTime.Seconds + " s " + execTime.Milliseconds + " ms");
+            
+            // TEST BETTER LINEAR SEARCH
+            // Save starting time
+            startTime = DateTime.Now;
+            
+            // Search and print
+            for (int i = 0; i < valuesToSearch.Length; i++)
+            {
+                PrintSearchResult(BetterLinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
+                    valuesToSearch[i]);
+            }
+            
+            // Print execution time
+            execTime = (DateTime.Now).Subtract(startTime);
+            Console.WriteLine("Search time with BetterLinearSearch: " + execTime.Seconds + " s " + execTime.Milliseconds + " ms");
         }
     }   
 }
