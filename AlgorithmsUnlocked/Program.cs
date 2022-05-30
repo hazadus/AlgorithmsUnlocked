@@ -112,49 +112,44 @@ namespace AlgorithmsUnlocked
         
         static void Main(string[] args)
         {
-            // Declare constants
+            // Declare constants and variables
             const int TestArraySize = 64000;
             const int ValuesToSearchCount = 3;
+            DateTime startTime;
 
             // Start the program
             Console.WriteLine("* * * Algorithms Unlocked. Linear Search tests * * *");
             
-            // TEST LinearSearch
+            // Init test arrays
             int[] testArray = CreateTestArray(TestArraySize);
             int[] valuesToSearch = CreateTestArray(ValuesToSearchCount);
             
             //PrintArray(testArray, nameof(testArray));
             PrintArray(valuesToSearch, nameof(valuesToSearch));
-            
-            // TEST LINEAR SEARCH
-            // Save starting time
-            DateTime startTime = DateTime.Now;
-            
-            // Search and print
-            for (int i = 0; i < valuesToSearch.Length; i++)
+
+            for (int searchType = 0; searchType < 2; searchType++)
             {
-                PrintSearchResult(LinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
-                    valuesToSearch[i]);
+                // Save starting time
+                startTime = DateTime.Now;
+    
+                // Search and print
+                for (int i = 0; i < valuesToSearch.Length; i++)
+                {
+                    if (searchType == 0) // TEST LINEAR SEARCH
+                    {
+                        PrintSearchResult(LinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
+                            valuesToSearch[i]);
+                    } else if (searchType == 1) // TEST BETTER LINEAR SEARCH
+                    {
+                        PrintSearchResult(BetterLinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
+                            valuesToSearch[i]);
+                    }
+                }
+                
+                // Print execution time
+                TimeSpan execTime = (DateTime.Now).Subtract(startTime);
+                Console.WriteLine("Search time #" + searchType + ": " + execTime.Seconds + " s " + execTime.Milliseconds + " ms");
             }
-            
-            // Print execution time
-            TimeSpan execTime = (DateTime.Now).Subtract(startTime);
-            Console.WriteLine("Search time with LinearSearch: " + execTime.Seconds + " s " + execTime.Milliseconds + " ms");
-            
-            // TEST BETTER LINEAR SEARCH
-            // Save starting time
-            startTime = DateTime.Now;
-            
-            // Search and print
-            for (int i = 0; i < valuesToSearch.Length; i++)
-            {
-                PrintSearchResult(BetterLinearSearch(testArray, testArray.Length, valuesToSearch[i]), 
-                    valuesToSearch[i]);
-            }
-            
-            // Print execution time
-            execTime = (DateTime.Now).Subtract(startTime);
-            Console.WriteLine("Search time with BetterLinearSearch: " + execTime.Seconds + " s " + execTime.Milliseconds + " ms");
         }
     }   
 }
